@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
 }
+
+class GameRemoteDataSourceImpl {}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

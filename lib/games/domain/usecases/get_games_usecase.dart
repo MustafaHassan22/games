@@ -10,11 +10,6 @@ class GetGamesUsecase extends UseCase<List<Game>, NoParam> {
   GetGamesUsecase(this.gameRepo);
   @override
   Future<Either<Failure, List<Game>>> call(NoParam param) async {
-    try {
-      final games = await gameRepo.getGames();
-      return right(games);
-    } on ServerFailure catch (e) {
-      return left(ServerFailure(errMessage: e.errMessage.toString()));
-    }
+    return await gameRepo.getGames();
   }
 }
