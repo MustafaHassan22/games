@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games/core/usecase/usecase.dart';
 import 'package:games/games/domain/entities/game/game.dart';
 import 'package:games/games/domain/usecases/get_games_usecase.dart';
-
 part 'games_state.dart';
 
 class GamesCubit extends Cubit<GamesState> {
   final GetGamesUsecase _getGamesUsecase;
-  GamesCubit({required GetGamesUsecase getGameUsecase})
-      : _getGamesUsecase = getGameUsecase,
+  GamesCubit({
+    required GetGamesUsecase getGameUsecase,
+  })  : _getGamesUsecase = getGameUsecase,
         super(GamesInitial());
 
   Future<void> getAllGames() async {
