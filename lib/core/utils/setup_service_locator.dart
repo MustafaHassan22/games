@@ -3,7 +3,9 @@ import 'package:games/core/utils/api_service.dart';
 import 'package:games/games/data/data_source/game_datasource.dart';
 import 'package:games/games/data/repo/game_repo_impl.dart';
 import 'package:games/games/domain/repo/game_repo.dart';
+import 'package:games/games/domain/usecases/get_game_detials_usecase.dart';
 import 'package:games/games/domain/usecases/get_games_usecase.dart';
+import 'package:games/games/presentation/controller/cubit/cubit/game_details_cubit.dart';
 import 'package:games/games/presentation/controller/cubit/games_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -25,8 +27,14 @@ void initDependencies() {
     ..registerFactory(
       () => GetGamesUsecase(sl()),
     )
+    ..registerFactory(
+      () => GetGameDetialsUsecase(sl()),
+    )
     //cubit
     ..registerLazySingleton(
       () => GamesCubit(getGameUsecase: sl()),
+    )
+    ..registerLazySingleton(
+      () => GameDetailsCubit(getGameDetailsUsecase: sl()),
     );
 }

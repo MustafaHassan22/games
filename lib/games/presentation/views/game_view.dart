@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games/core/utils/setup_service_locator.dart';
 
 import 'package:games/games/presentation/controller/cubit/games_cubit.dart';
+import 'package:games/games/presentation/views/game_detials_view.dart';
 import 'package:games/games/presentation/widgets/custom_card.dart';
 
 class GamesView extends StatelessWidget {
@@ -34,7 +35,15 @@ class GamesView extends StatelessWidget {
                 itemCount: state.games.length,
                 itemBuilder: (context, index) {
                   final game = state.games[index];
-                  return CustomCard(game: game);
+                  return CustomCard(
+                    game: game,
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return GameDetailsView(gameId: game.id);
+                      }));
+                    },
+                  );
                 },
               );
             } else if (state is GamesFailure) {

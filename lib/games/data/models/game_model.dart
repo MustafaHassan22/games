@@ -29,6 +29,7 @@ class GameModel extends Game {
         freetogameProfileUrl: json['freetogame_profile_url'] as String,
       );
 
+  @override
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
