@@ -7,6 +7,7 @@ part 'games_state.dart';
 
 class GamesCubit extends Cubit<GamesState> {
   final GetGamesUsecase _getGamesUsecase;
+  final List<Game> allGames = [];
   GamesCubit({
     required GetGamesUsecase getGameUsecase,
   })  : _getGamesUsecase = getGameUsecase,
@@ -19,5 +20,15 @@ class GamesCubit extends Cubit<GamesState> {
       (l) => emit(GamesFailure(l.errMessage)),
       (games) => emit(GamesSuccess(games)),
     );
+  }
+
+  void searchGames(String query) {
+    if (state is GamesSuccess) {
+      final filterGames = allGames
+          .where(
+              (game) => game.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      emit(GamesSuccess(filterGames));
+    }
   }
 }
