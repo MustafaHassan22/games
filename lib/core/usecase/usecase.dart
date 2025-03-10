@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:games/core/error/failure.dart';
 
-abstract class UseCase<Type, Param> {
+abstract interface class UseCase<Type, Param> {
   Future<Either<Failure, Type>> call(Param param);
 }
 
