@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games/core/utils/setup_service_locator.dart';
 import 'package:games/feature/auth/presentation/controller/cubit/auth_cubit.dart';
-import 'package:games/feature/auth/presentation/views/login_view.dart';
+import 'package:games/feature/splash_screen/splash_screen.dart';
 import 'package:games/firebase_options.dart';
 
 void main() async {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const LoginScreen(), // Set the initial screen to LoginScreen
+        home: const SplashScreen(), // Set SplashScreen as the initial route
       ),
     );
   }

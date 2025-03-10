@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:games/feature/auth/presentation/controller/cubit/auth_cubit.dart';
 import 'package:games/feature/auth/presentation/views/sign_up_view.dart';
-import 'package:games/feature/auth/presentation/widgets/custom_auth_field.dart';
 import 'package:games/feature/auth/presentation/widgets/custom_text_field.dart';
 import 'package:games/feature/games/presentation/views/game_view.dart';
 
