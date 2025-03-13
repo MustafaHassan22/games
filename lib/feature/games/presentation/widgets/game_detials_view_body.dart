@@ -7,7 +7,6 @@ import 'package:games/feature/games/presentation/widgets/game_info.dart';
 import 'package:games/feature/games/presentation/widgets/game_pic.dart';
 import 'package:games/feature/games/presentation/widgets/game_screenshots.dart';
 import 'package:games/feature/games/presentation/widgets/game_title.dart';
-
 import 'package:games/feature/games/presentation/widgets/paypal_payment_button.dart';
 
 class GameDetailsViewBody extends StatelessWidget {
