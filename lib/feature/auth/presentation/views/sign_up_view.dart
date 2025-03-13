@@ -28,6 +28,7 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  final _nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -81,7 +82,7 @@ class _SignUpFormState extends State<SignUpForm> {
   void _navigateToLogin(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => LoginScreen()),
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
     );
   }
 
@@ -102,61 +103,80 @@ class _SignUpFormState extends State<SignUpForm> {
         }
       },
       builder: (context, state) {
-        return Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomTextFormField(
-                controller: _emailController,
-                labelText: 'Email',
-                keyboardType: TextInputType.emailAddress,
-                validator: _validateEmail,
+        return Center(
+          child: SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 400, // Limit the width for better aesthetics
+                minHeight: MediaQuery.of(context).size.height -
+                    100, // Ensure it takes full height minus app bar/padding
               ),
-              const SizedBox(height: 16),
-              CustomTextFormField(
-                controller: _passwordController,
-                labelText: 'Password',
-                obscureText: _obscurePassword,
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                  ),
-                  onPressed: _togglePasswordVisibility,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomTextFormField(
+                      controller: _nameController,
+                      labelText: 'Name',
+                      keyboardType: TextInputType.name,
+                    ),
+                    const SizedBox(height: 16),
+                    CustomTextFormField(
+                      controller: _emailController,
+                      labelText: 'Email',
+                      keyboardType: TextInputType.emailAddress,
+                      validator: _validateEmail,
+                    ),
+                    const SizedBox(height: 16),
+                    CustomTextFormField(
+                      controller: _passwordController,
+                      labelText: 'Password',
+                      obscureText: _obscurePassword,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: _togglePasswordVisibility,
+                      ),
+                      validator: _validatePassword,
+                    ),
+                    const SizedBox(height: 16),
+                    CustomTextFormField(
+                      controller: _confirmPasswordController,
+                      labelText: 'Confirm Password',
+                      obscureText: _obscureConfirmPassword,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureConfirmPassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: _toggleConfirmPasswordVisibility,
+                      ),
+                      validator: _validateConfirmPassword,
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
+                      onPressed: state is AuthLoading
+                          ? null
+                          : () => _onSignUpPressed(context),
+                      child: state is AuthLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text('Sign Up'),
+                    ),
+                    const SizedBox(height: 16),
+                    TextButton(
+                      onPressed: () => _navigateToLogin(context),
+                      child: const Text('Already have an account? Login'),
+                    ),
+                  ],
                 ),
-                validator: _validatePassword,
               ),
-              const SizedBox(height: 16),
-              CustomTextFormField(
-                controller: _confirmPasswordController,
-                labelText: 'Confirm Password',
-                obscureText: _obscureConfirmPassword,
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _obscureConfirmPassword
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                  onPressed: _toggleConfirmPasswordVisibility,
-                ),
-                validator: _validateConfirmPassword,
-              ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: state is AuthLoading
-                    ? null
-                    : () => _onSignUpPressed(context),
-                child: state is AuthLoading
-                    ? const CircularProgressIndicator(color: Colors.white)
-                    : const Text('Sign Up'),
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () => _navigateToLogin(context),
-                child: const Text('Already have an account? Login'),
-              ),
-            ],
+            ),
           ),
         );
       },

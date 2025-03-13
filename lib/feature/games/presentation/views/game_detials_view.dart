@@ -19,7 +19,9 @@ class GameDetailsView extends StatelessWidget {
       body: BlocProvider(
         create: (context) => GameDetailsCubit(
           getGameDetailsUsecase: sl(),
-        )..getGameDetials(GameDetialsParam(id: gameId)),
+        )..getGameDetials(
+            GameDetialsParam(id: gameId),
+          ),
         child: const GameDetailsViewBody(),
       ),
     );
